@@ -47,7 +47,7 @@ def db_create():
     for element in list(result_queue.queue):
         curs.execute(ps, (element['filepath'], element['sha256sum']))
     curs.execute('select count(id) from files')
-    number = curs.fetchall()[0]
+    number = curs.fetchone()[0]
     curs.execute('select count(sha256sum) from files group by sha256sum having ( count(sha256sum) > 1 )')
     duplicates = curs.fetchone()[0]
     curs.close(), conn.commit(), conn.close()
